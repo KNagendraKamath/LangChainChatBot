@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@huggingface/inference": "^4.6.1",
+    "@langchain/community": "^0.3.49",
+    "@langchain/core": "^0.3.66",
+    "@langchain/google-genai": "^0.2.16",
+    "@langchain/openai": "^0.6.3",
+    "@supabase/supabase-js": "^2.53.0",
+    "dotenv": "^16.4.5",
+    "langchain": "^0.3.30",
+    "supabase": "^2.33.9"
+  },
+  "scripts": {
+    "start": "bun run --hot index.js",
+    "build": "bun build ./index.js --outdir ./dist"
+  }
+}

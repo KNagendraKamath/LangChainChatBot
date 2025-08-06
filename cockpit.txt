@@ -1,0 +1,1474 @@
+ 
+
+Version
+The table below will be updated when a new change is made in the PDL/PIL Standard. The description of a change will be listed in details. 
+
+This standard will be under continuous development and future releases are to be expected. If the Standard document relates to a certain version of a release, e.g., a new version of Editor, the release will be addressed.
+
+The version of this standard follows versioning including two numbers, which are separated by a dot, e.g. 0.9.
+
+Doc. Version
+
+Release
+
+Created by
+
+ 
+
+Date
+
+Description
+
+0.1
+
+ 
+
+@Serina Trankjær Jensen @Sigbritt Dam 
+
+Feb 1, 2024 
+
+First draft
+
+0.2
+
+ 
+
+@Sigbritt Dam 
+
+Mar 8, 2024 
+
+Integrated PDL and PIL in one Standard Description
+
+0.3
+
+ 
+
+@Serina Trankjær Jensen @Sigbritt Dam 
+
+Apr 2, 2024 
+
+Verification before handed over to Customer.
+
+0.4
+
+ 
+
+@Sigbritt Dam 
+
+Apr 19, 2024 
+
+Removed section 4 Process & requirements
+
+Added attributes UpperLimitLocal and LowerLimitLocal in Data type ‘Samples’
+
+Added attribute 
+
+0.5
+
+ 
+
+@Sigbritt Dam 
+
+Jun 5, 2024 
+
+Consistent naming of date attributes in  ‘Description of Elements’ and ‘Examples of using operatiors for data types’
+
+0.6
+
+ 
+
+@Kenneth Oksen 
+
+Jun 6, 2024 
+
+Added datamodel and PIL related information
+
+0.7
+
+ 
+
+@Jonas Larsen 
+
+Jul 11, 2024  
+
+Removed redundant operators
+
+0.8
+
+ 
+
+@Serina Trankjær Jensen 
+
+Jul 15, 2024  
+
+Revision of PDL example and added a description of operators.
+
+0.9
+
+ 
+
+@Kenneth Oksen 
+
+Aug 7, 2024  
+
+Updated PIL documentation
+
+0.10
+
+ 
+
+@Jonas Larsen 
+
+Aug 16, 2024  
+
+Added a ‘String Operators' table under Operations, and moved '%’ from Numeric Operators.
+
+0.11
+
+ 
+
+@Sigbritt Dam 
+
+Oct 30, 2024 
+
+Removed column ‘Operations’ from all Datatypes Column
+
+Added a comment to CPR row in all datatypes except in datatype ‘Patient’
+
+Datatype Patient: 
+
+Changed BirthDate to Age
+
+Added two new attributes 
+
+HomeAdress
+
+TempAdress
+
+Health
+
+Renamed attribute City (from Town to City)
+
+Datatype Appointment
+
+Split AppointmentDateTime into two seperate attributes
+
+AppointmentDate
+
+AppointmentTime
+
+Removed the attribute ‘IsVideoSession’
+
+Datatype Service
+
+Renamed attribute ServiceName (from Designation to ServiceName)
+
+Datatype Medication
+
+Renamed Datatype Medication (from Medicine to Medication)
+
+Renamed attribute ATCName (from Codedesignation to ATCName)
+
+Added a new attribute EffectuateMedication 
+
+Datatype Sample
+
+Renamed attributes
+
+SampleDate (From SamplingDate to SampleDate)
+
+SampleCode (from SamplingCode to SampleCode)
+
+SampleCodeType (from CodeType to SampleCodeType)
+
+SampleName (from CodeDesignation to SampleName)
+
+SampleUnit (from Unit to SampleUnit)
+
+Datatype Referral
+
+Removed attribute ‘SpecialityType’
+
+Added attribute 
+
+SpecialityCode
+
+ReferralType
+
+0.12
+
+ 
+
+@Serina Trankjær Jensen 
+
+Dec 16, 2024  
+
+Removed this section “3.4 Examples of Using Operators for Data Types” as it did not provide any value.
+
+Removed PDL Exampel.
+
+1.0
+
+ 
+
+@Kenneth Oksen 
+
+ Jun 2, 2025 
+
+Version related to KC Profile Tool version 1.0
+
+1.1
+
+ 
+
+@Sigbritt Dam 
+
+May 12, 2025  
+
+Updated with new attributes
+
+DateType Medication
+
+Attributes
+
+EffectuateMedication
+
+DoseDispense
+
+PackageSize
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+1. Introduction/background
+There is an increasing centralization and specialization in the Danish healthcare system, combined with accelerated treatments at hospitals, which increases the demand for services in general practice.
+
+General practitioners (GPs) will increasingly need to act as coordinators in the patient's journey through illness. There is also a rise in the number of elderly and patients with complex, chronic diseases, which further pressures general practice.
+
+Based on research results, the Organization of General Practitioners in Denmark (PLO) and the Danish College of General Practitioners (DSAM) have been able to identify areas where there is evidence that general practice can help manage the increasing demand for healthcare services and ensure more effective treatment, including population care.
+
+Based on this, in the 2022 agreement between the Regional Local Government (RLTN) and PLO, there was an agreement on "New solutions for effective population care," which involves developing a patient cockpit and a data platform for population care until 2024.
+
+In 2023, PLO, Medcom, and PLSP among others, analyzed how a clinical cockpit could help streamline population care. Among other things, it was beneficial to provide the GPs with a tool to view selected population extracts based on health profiles.
+
+To start with, it was decided to proceed with the following 5 sub-projects. 
+
+PDL standard, which should support the retrieval of populations.
+
+PIL standard, which should specify which information one wishes to see on the population.
+
+Editor, which should support specialists in defining profiles that can be displayed in General Practice System (LPS) or other Medical Professional Systems (MPS).
+
+Viewer, which should assist the specialist in their work of defining profiles.
+
+Repository, which should store the defined profiles, so clinicians from the general practice system can use an already defined profile.
+
+This Standard document will give the reader a thorough knowledge about Population Definition Language (PDL) and Population Interpretation Language (PIL). 
+
+1.1 A short Description of PDL/PIL
+The purpose of PDL and PIL has been to create a language partly to define population extracts from any Medical Professional System (MPS) e.g. General Practice Systems (LPS) and at the same time to handle patient overviews across systems. It should be seen as a tool for Clinical Reference Group or other actors to define various data extracts, which can be distributed in many different contexts (general practice, specialists, etc.).
+
+1.1.1 Population Definition Language (PDL)
+PDL is the first step towards being able to extract and work with a population. In PDL, a population is defined based on a set of selected data types and attributes. The result of a PDL is a simple list of social security numbers (CPR-number) for the population, which we aim to identify.
+
+1.1.2 Population Interpretation Language (PIL)
+The list of social security numbers is then worked with through PIL. Once the population is defined, it is essential to associate the population with a set of parameters that facilitate the evaluation of the patient's condition and provide the physician recommendations on an appropriate course of treatment.
+
+1.2 Reading Guide
+The audience for this document includes software developers and implementers of the PDL/PIL standard. This includes public and private disease management organizations as well as local, regional, and national health information exchange networks that wish to create PDL/PIL and process these in a local system.
+
+1.3 Scope
+The first version of PDL and PIL will be limited to address the mentioned datatypes, corresponding attributes, and operators listed in Chapter 3.
+
+In the first version attributes, such as formulas (e.g. BMI), are not included. The formulas will be listed in the Backlog and will be included in prioritized order. 
+
+*Notice that this standard will be under continuous development and that future releases are to be expected.
+
+2. Definitions
+This section explains the abbreviations used in this Standard.
+
+2.1 Word Definitions
+Abbreviation
+
+Description
+
+KC
+
+Clinical cockpit
+
+PDL
+
+Population Definition Language
+
+PIL
+
+Population Interpretation Language
+
+GP
+
+General Practitioner
+
+POC
+
+Proof of Concept
+
+LPS
+
+General Practice System
+
+MPS
+
+Medical Professional System
+
+PLO
+
+Organization of General Practitioners in Denmark
+
+DSAM
+
+Danish College of General Practitioners
+
+RLTN
+
+Regional Local Government
+
+3. Description of the Standard
+This Chapter gives a thorough description of the elements included in PDL and PIL and a description and intended use of each element.
+
+ 
+
+3.1 Description of the Elements
+3.1.1 Datatypes
+A datatype can be described as the name/header of a specific object that contains several attributes. The datatype in itself does not hold any data, as it is designed to group certain attributes which a specialist can select from in the development of a PDL/PIL.
+
+In section 3.2.1 there is an overview of the available datatypes in this version of the standard. In upcoming versions, it will be possible to expand the standard with additional relevant data types.
+
+3.1.2 Atributes
+An attribute describes a part of the object and is used as a parameter that must be included to find a certain population. For example, could the attribute ‘ICPCCode' and the actual code ‘K78’ be a part of a PDL definition that seeks to find the population with atrial fibrillation. For PIL the attributes are used to define which parameters should be displayed for each individual social security numbers (CPR-number).
+
+In sections 3.2.2 to 3.2.9 the attributes included in this version of the standard are listed. The attributes are split into sections referring to the Data types.
+
+Attributes = name of the specific attribute.
+
+Danish translation of attributes
+
+Type = referring to what type is meant to be used.
+
+Description = description of the attribute.
+
+Reference standards = referring to a recognized standard if one exists.
+
+3.2 Clarification of Data Types and the Corresponding Attributes
+In the tables below, the available data types and the corresponding attributes for creating a PDL or PIL are listed. It is an option to expand the list of data types and attributes in newer versions if the necessity arises for additional data types and attributes.
+
+3.2.1 Data Types
+Data types
+
+Patient
+
+Appointments
+
+Services
+
+Diagnosis
+
+Medication
+
+Samples
+
+Referrals
+
+3.2.2 Overview of the data model
+The figure below shows that the data models should be understood as a structured medical history, organized in relation to the individual patient. It can be seen in the figure that each patient can have 0 to many associated data types, such as diagnoses, services, medications, etc.
+
+Generated UML Diagram
+3.2.3 Patient
+The following data model encapsulates the fundamental and prevalent patient information with in the Danish healthcare systems. The patient profile is identified by the 10-digit CPR number.
+
+Attributes 
+
+Danish translation of attributes
+
+Type
+
+Description
+
+Reference standards
+
+CprNo
+
+CPR-nummer
+
+string
+
+CPR number, as listed in the CPR registry*
+
+ 
+
+Age
+
+Alder
+
+Number
+
+Patients age at a given time
+
+ 
+
+FirstName
+
+Fornavn
+
+String
+
+Official firstname, as listed in the CPR registry*
+
+ 
+
+MiddleName
+
+Mellemnavn
+
+String
+
+Official middlename, as listed in the CPR registry* 
+
+ 
+
+LastName
+
+Efternavn
+
+String
+
+Official lastname, as listed in the CPR registry* 
+
+ 
+
+HomeAdress
+
+Folkeregister adresse
+
+String
+
+Adress registered in the national register of Persons
+
+Folkeregister
+
+TempAdress
+
+Midlertidig adresse
+
+String
+
+An adress a person might have temporarily, e.X
+
+ 
+
+PostalCode
+
+Postnummer
+
+String
+
+Postal code of the patient, as listed in the CPR registry*
+
+ 
+
+City
+
+By
+
+String
+
+A Patients city of residence, as listed in the CPR registry*
+
+ 
+
+Gender 
+
+Køn
+
+String
+
+A Patients Gender (F, M, Other)
+
+ 
+
+*CPR registry: A Master data service provided by NSP that returns data about CPR. See the link to the service in the section ‘Related links’ PDL/PIL Standard Description | 5. Related links in table, row 1. This applies to all data models below.
+
+3.2.4 Appointment
+An appointment refers to scheduled contacts involving a patient and healthcare professional within the healthcare system. Appointments may encompass consultations, diagnostic tests, therapeutic sessions, or other health-related contacts.
+
+Attributes 
+
+Danish translation of attributes
+
+Type
+
+Description
+
+Reference standards
+
+CprNo
+
+CPR-nummer
+
+String
+
+CPR number, as listed in the CPR registry 
+
+Is only used as Identifier in Services, to connect the different datatypes to a specific patient
+
+ 
+
+AppointmentDate
+
+Aftaledato
+
+DateTime
+
+The scheduled date for the appointment. 
+
+ 
+
+3.2.5 Service
+Services encompass any form of service, treatment, or intervention conducted to promote, maintain, or enhance a patient's health and well-being.
+
+Each service is associated with a specific Service Code used for billing and documenting services within the healthcare system. This Service Code varies depending on the type of service provided to the patient.
+
+Attributes 
+
+Danish translation of attributes
+
+Type
+
+Description
+
+Reference standards
+
+CprNo
+
+CPR-nummer
+
+String
+
+CPR number, as listed in the CPR registry 
+
+Is only used as Identifier in Services, to connect the different datatypes to a specific patient
+
+ 
+
+ServiceCode*
+
+Ydelseskode
+
+String
+
+Service Code
+4 characters (official Service Codes)
+
+Honorartabel (OK22)
+
+ServiceName
+
+Ydelsesnavn
+
+String
+
+Name of the Service
+
+Honorartabel (OK22)
+
+ServiceDate
+
+Ydelsesdato
+
+DateTime
+
+Date of the service
+
+ 
+
+*Service Code: A Service Code consists of a 4-digit string code. For instance, a standard consultation might be assigned a Service Code such as 0101.
+
+The Service Code is based on the ‘honorartabel’ from October 1, 2024, published by PLO and accessible in the link listed in Section ‘Related links’  in the table, row 2. 
+
+3.2.6 Diagnosis
+A diagnosis is the identification or determination of a disease, condition, or disorder based on symptoms, clinical findings, laboratory tests, and other relevant information and examinations. It is a medical assessment in which the physician, evaluating the patient's condition, establishes the underlying cause of the symptoms. Diagnoses can encompass both acute and chronic diseases, as well as physical, mental, or emotional conditions.
+
+Both the ICPC-2 code and the ICD-10 code are used to register and classify diagnoses in this data model. 
+
+Attributes
+
+Danish translation of attributes
+
+Type
+
+Description
+
+Reference standards
+
+CprNo
+
+CPR-nummer
+
+String
+
+CPR number, as listed in the CPR registry 
+
+Is only used as Identifier in Services, to connect the different datatypes to a specific patient
+
+ 
+
+ICPCCode*
+
+ICPC-kode
+
+String 
+
+ICPC code
+
+ICPC-2
+
+ICPCName
+
+ICPC navn
+
+String
+
+ICPC name
+
+ 
+
+ICDCode**
+
+ICD-kode
+
+String
+
+ICD code
+
+ICD-10
+
+ICDName
+
+ICD navn
+
+String
+
+ICD name
+
+ 
+
+DebutDate
+
+Debut dato
+
+DateTime
+
+Date when diagnosis was identified as debut date for the first time.
+
+ 
+
+CreatedDate
+
+Oprettelsesdato 
+
+DateTime
+
+Date when the diagnosis was created.
+
+ 
+
+RegistrationDateEnd
+
+Registrerings slutdato
+
+DateTime
+
+Date for completion of the diagnosis
+
+ 
+
+*ICPC-2: The hierarchically structured classification system specifically designed to describe health issues in general practice. It consists of a letter followed by a two-digit number. For example, the ICPC-2 code for dementia is P70.
+
+The ICPC-2 codes are published by KiAP and are available at the link listed in the section ‘Related Links’ in table row 3.
+
+**ICD-10: The ICD-10 code has a wide application and covers all areas of medical practice. The code consists of a letter followed by numbers. An example of an ICD-10 code is F209 for schizophrenia UNS.
+
+The ICD-10 codes are published by Sundhedsdatastyrelsen (SDS) and are available at the link listed in the section ‘Related Links’ in table row 4.
+
+3.2.7 Medication
+Medication pertains to pharmaceutical substances utilized as a method of treatment. Within this data model, medication specifically denotes current prescriptions and does not encompass deleted or discontinued medications.
+
+Attributes
+
+Danish translation of attributes
+
+Type
+
+Description
+
+Reference standards
+
+CprNo
+
+CPR-nummer
+
+String
+
+CPR number, as listed in the CPR registry 
+
+Is only used as Identifier in Services, to connect the different datatypes to a specific patient
+
+ 
+
+CreatedDate
+
+Oprettelsesdato
+
+DateTime
+
+Date when the medication was created.
+
+ 
+
+UpdatedDate
+
+Opdateringsdato
+
+DateTime
+
+Date when the medication was updated.
+
+ 
+
+StartDate
+
+Startdato
+
+DateTime
+
+Date when the medication was started.
+
+ 
+
+EndDate
+
+Slutdato 
+
+DateTime
+
+Date when the medication was concluded.
+
+ 
+
+ATCCode*
+
+ATC-kode
+
+String 
+
+ATC code of the medication
+
+ATC
+
+ATCName
+
+Medicinnavn
+
+String
+
+Name of the medicine
+
+ 
+
+DoseType
+
+Dosis type
+
+String
+
+Dosage of the medication
+
+Regular
+
+PN (As required)
+
+FMK
+
+DoseStrength
+
+Dosis styrke
+
+Number
+
+The strength of the medication.
+
+FMK
+
+StrengthUnit
+
+Styrkeenhed
+
+String 
+
+The abbreviation for the unit of measurement used for the medication, e.g., mg (milligram)
+
+FMK
+
+DiscontinuedMedications
+
+Seponeret medicin
+
+bit 
+
+Discontinued medication
+
+FMK
+
+EffectuateMedication
+
+Effektuer medicin
+
+ 
+
+If yes, then show date for effectuated medication
+
+FMK
+
+DoseDispense
+
+Dosisdispensering
+
+ 
+
+If yes, the show date for doseDispense
+
+FMK
+
+PackageSize
+
+Pakkestørrelse
+
+ 
+
+Show effectuated packagesize
+
+FMK
+
+*ATC code refers to the classification of medications based on their active ingredients and therapeutic use. An ATC code consists of both letters and numbers, such as N02BE01 for Paracetamol.
+
+The ATC codes are published by WHO and available at the link listed in the section ‘Related Links’ in table row 5.
+
+3.2.8 Sample
+Samples refer to laboratory tests and other patient values. 
+
+Laboratory tests give results of analyses intended to examine specific analyses, indicators, or conditions in biological samples. These samples may include blood, urine, tissue, cell samples, and other biological materials.
+
+Patient Values can be measurements of height and weight, amount of cigarettes or alcohol a day, etc. 
+
+In this data model, samples can contain numerical values and textual values such as ‘indication detected/not detected’. Written results and tables are not included.
+
+Attributes
+
+Danish translation of attributes
+
+Type
+
+Description
+
+Reference standards
+
+CprNo
+
+CPR-nummer
+
+String
+
+CPR number, as listed in the CPR registry 
+
+Is only used as Identifier in Services, to connect the different datatypes to a specific patient
+
+ 
+
+SampleDate
+
+Prøvedato
+
+DateTime
+
+Date and time when the sample was collected.
+
+ 
+
+SampleCode
+
+Prøvekode
+
+String
+
+Code indicating which sample was collected e.g. NPU27300
+
+ 
+
+SampleCodeType*
+
+Kodetyper
+
+String
+
+Code type for the sample e.g., NPU
+
+NPU
+
+DNK
+
+MDS
+
+MCS
+
+SampleName
+
+Prøvenavn
+
+String
+
+Name of the sample
+
+ 
+
+TextValue
+
+Tekstværdi
+
+String
+
+Text value of the sample
+
+ 
+
+NumericValue
+
+Numerisk værdi
+
+Number
+
+Numeric value of the sample
+
+ 
+
+UpperLimit**
+
+Øvre grænse
+
+Number
+
+The national upperlimit value defined on a labsample
+
+ 
+
+LowerLimit**
+
+laveste grænse
+
+Number
+
+The national lowerlimit value defined on a labsample
+
+ 
+
+UpperLimitLocal***
+
+Øvre grænse lokal
+
+Number
+
+The local upperlimit value defined on a labsample 
+
+ 
+
+LowerLimitLocal***
+
+Laveste grænse lokal
+
+Number
+
+The local lowerlimit value defined on a labsample
+
+ 
+
+SampleUnit
+
+Enhed
+
+String
+
+The unit of sample.
+
+If the NPU code scheme is used, the unit is defined in the code scheme for the specific analysis.
+
+ 
+
+*The sample code: The data model is based on standardized IUPAC-codes from Medcom (Laboratorieområdet - MedCom) and KiAP codes used to identify and describe various types of samples, analyses, and examinations performed. Codes such as NPU, DNK, MDS, and MCS are supported.
+
+The codes are published by KiAP and available at the link listed in the section ‘Related links’ and in the table, row 6. 
+
+**UpperLimit and LowerLimit refer to the standard reference intervals that are set in laboratories and come with a laboratory result 
+
+***UpperLimitLocal and LowerLimitLocal refer to the possibility of specifying a local reference value if needed
+
+3.2.9 Referral
+A referral denotes a written request from one healthcare professional to another or a specialist for the performance of specific examinations, diagnostic procedures, treatments, or consultations for a patient. Referrals often encompass details regarding the patient's condition, symptoms, medical history, and the rationale behind the referral.
+
+Attributes
+
+Danish translation of attributes
+
+Type
+
+Description
+
+Reference standards
+
+CprNo
+
+CPR-nummer
+
+String
+
+CPR number, as listed in the CPR registry 
+
+Is only used as Identifier in Services, to connect the different datatypes to a specific patient
+
+ 
+
+ReferralDate
+
+Henvisningsdato
+
+DateTime 
+
+Date of referral formation.
+
+ 
+
+SpecialityName
+
+Speciale navn
+
+String
+
+Refers to the specialty to which the referral is sent.
+
+E.x. Speciality Name ‘Psykiatri’
+
+MedCom
+
+SpecialityCode
+
+Speciale kode
+
+String
+
+Refers to the specialty to which the referral is sent.
+
+For example, specialty Code 24, which is a referral to a private practicing psychiatrist.
+
+ 
+
+ReferralType
+
+Henvisningstype
+
+String
+
+Refers to Medcom standardization referral types
+
+MedCom
+
+*Speciality Code refers to a specialty number within the specialty to which a referral has been sent. This refers to both the specialty code used in primary care specialties and hospital specialties.
+
+Specialty Code are published by MedCom and available at the link listed in the section ‘Related links’ in table, row 7.
+
+ 
+
+4.0 Profile structure
+A Profile is the main enity outputtet by the KC API. PLSP - KlinikkensCockpit LPS API 
+
+Below are the PDL and PIL attributes explained.  
+
+4.1 PDL
+PDL uses JSON and JSONLogic (JsonLogic ) to express logical conditions for selecting patients matching specific criteria. 
+
+Sample PDL definition:
+
+
+
+{
+  "and": [
+    {"patient": {"and": [{">=": [{"var": "Age"}, 18]}, {"<=": [{"var": "Age"}, 60]}]}},
+    {"service": {"and": [{"none": [{"var": "ServiceCode"}, "0123"]}, {"none": [{"var": "ServiceCode"}, "2150"]}]}}           
+}
+“Patients between 18 and 60 years old, that dont have any services with code = 0123 and 2150.“
+
+image-20250602-092952.png
+PDL visualization
+ 
+
+4.1.1 Supported JSONLogic operators
+Category
+
+Operator
+
+Description
+
+Example
+
+Result
+
+Data Access
+
+var
+
+Retrieve data from the data object
+
+{"var": "name"} with data {"name": "John"}
+
+"John"
+
+Logic & Boolean
+
+==
+
+Equality with type coercion
+
+{"==": [1, "1"]}
+
+true
+
+ 
+
+!=
+
+Not equal with type coercion
+
+{"!=": [1, 2]}
+
+true
+
+ 
+
+!
+
+Logical negation
+
+{"!": [false]}
+
+true
+
+ 
+
+or
+
+Logical OR
+
+{"or": [false, true]}
+
+true
+
+ 
+
+and
+
+Logical AND
+
+{"and": [true, false]}
+
+false
+
+Comparison
+
+>
+
+Greater than
+
+{">": [5, 3]}
+
+true
+
+ 
+
+>=
+
+Greater than or equal
+
+{">=": [5, 5]}
+
+true
+
+ 
+
+<
+
+Less than
+
+{"<": [3, 5]}
+
+true
+
+ 
+
+<=
+
+Less than or equal
+
+{"<=": [3, 5]}
+
+true
+
+Array Operations
+
+none
+
+Test if no elements pass condition
+
+{"none": 1,3,5], 2}
+
+true
+
+ 
+
+in
+
+Test if value is in array
+
+{"in": [2, [1,2,3]]}
+
+true
+
+String Operations
+
+in
+
+Test if substring is in string
+
+{"in": ["ell", "hello"]}
+
+true
+
+4.1.2 Custom Extensions to JSONLogic
+The JSONLogic language is extended with the below custom operators. 
+
+Category
+
+Operator
+
+Description
+
+Example
+
+Result
+
+Comparison
+
+age_check 
+Test if a is older or newer
+
+{"<": [{"age_check": ["day", {"var": "EndDate"}]}, 0]}
+
+true
+
+String Operations
+
+starts_with
+
+Test if string starts with substring
+
+{"starts_with": ["DA00", { "var": "ICDCode" }]}
+
+true
+
+4.1.2.1 age_check explained
+This operator performs date-based calculations to determine time differences. 
+
+
+
+{"<": [{"age_check": ["day", {"var": "EndDate"}]}, 0]}
+Takes a time unit ("day", “month”, “year”) and a value 
+
+Value must be a integer with a value <= 0
+
+Calculates the difference between the current date and the EndDate and outputs an integer representing a count of either "day", “month”, “year”.
+
+This is then compared with 0 to determine if the EndDate is in the future (i.e., if the medication is still active)
+
+
+4.2 PIL
+A PIL is represented as a structured JSON document with entities including information, columns, criteria, operations, values, and markers. The PIL data model describes how information in a PIL document is structured.
+
+4.2.1 PIL datamodel
+A PIL is represented through the below data model. The data model describes how the information in the PIL document is structured. The output of a PIL is a JSON document. 
+
+The data model shown in the diagram contains six entities: PIL, Information, Column, Criteria, Operation, Value, and Marker. 
+
+Generated UML Diagram
+ 
+
+Sample PIL definition:
+
+
+
+{
+    "displayname": "Kolesterol - LDL",
+    "datatype": "sample",
+    "values": [
+      {"identifier": "15", "attribute": "NumericValue", "type": "Number"}, 
+      {"identifier": "16", "attribute": "Unit", "type": "String"}, 
+      {"identifier": "17", "attribute": "SamplingTime", "type": "DateTime"}
+    ],
+    "criteria": {"and": [{"in": [{"var": "SamplingCode"}, ["DNK35308", "NPU01568"]]}]},
+    "operation": {"max": "SamplingTime"}
+}
+In summary, this column will display the numeric value, unit, and sampling time of the most recent LDL cholesterol test for each patient in the population, using either the Danish or international test code.
+
+ 
+
+4.2.2 in_var
+An in_var (input variable) is a attribute of the PIL data model that allows for the definition of intermediate variables or calculations that can be referenced elsewhere in the pil .
+
+The purpose of in_vars is be creating reusable calculated values results that can be referenced multiple times throughout a profile without having to repeat the same logic. 
+
+Sample in_var definition:
+
+
+
+{
+    "Name": "l95_latest_created_date",
+    "datatype": "diagnosis",
+    "value": { "attribute": "CreatedDate", "type": "DateTime" },
+    "criteria": { "==": [{ "var": "ICPCCode" }, "L95"] },
+    "operation": { "max": [{ "var": "CreatedDate" }] }
+}
+ 
+
+Sample in_var use in a PIL criteria:
+
+
+
+"and": [
+  { "==": [{"var": "ServiceCode"}, "0120"]},
+  { "==": [{ "var": "ServiceDate" }, { "in_var": "l95_latest_created_date" }] }
+]
+ 
+
+4.2.3 Operation in PIL
+Operations allow for aggregating or selecting specific values from multiple rows of data.
+
+Operator
+
+Description
+
+Example
+
+max
+
+Finds the largest or newest value in a column
+
+{"max": "SampleDate"}
+
+min
+
+Finds the smallest or oldest value in a column
+
+{"min": "SampleDate"}
+
+all
+
+Finds all values of rows in the dataset
+
+{"all": ""}
+
+count
+
+Counts the number of rows in the dataset
+
+{"count": ""}
+
+Samples:
+
+all: returns all the diagnoses CreatedDate.
+
+
+
+{
+  "displayname": "ICD",
+  "datatype": "diagnosis",
+  "values": [{"identifier": "1", "attribute": "CreatedDate", "type": "DateTime"}],
+  "criteria": {"and": [{ "in": [{"var": "ICDCode"}, ["DS22", "DS32"]]}]},
+  "operation": {"all": ""}
+}
+ 
+
+count: returns the number of active medications as a number
+
+
+
+{
+  "displayname": "Polyfarmaci",
+  "datatype": "medicine",
+  "values": [],
+  "criteria": {"and": [{"!=": [{"var": "DiscontinuedMedications"}, false]}]},
+  "operation": {"count": ""}
+}
+5. Related links
+Description
+
+Link
+
+1	
+CPR service 
+B31 CPR Enkeltopslags Service (SCES) - NSP services - Global Site (nspop.dk)
+
+2	
+Honorartabel
+Honorarer og ydelser i almen praksis (laeger.dk)
+
+3	
+ICPC-2 codes
+icpc_2_kodekort.pdf (kiap.dk)
+
+4	
+ICD-10 codes
+SKS-browseren (medinfo.dk)
+
+5	
+ATC codes
+Anatomical Therapeutic Chemical (ATC) Classification (who.int)
+
+6	
+IUPAC codes
+KiAP - Min praksis - Andre services - Koder - IUPAC
+
+7	
+Specialty Codes
+ Specialekoder - MedCom
+
+8	
+JsonLogic Operations
+Supported Operations (jsonlogic.com)
+
+9	
+Classifications
+
+Klassifikationer 
+
+ 

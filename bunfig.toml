@@ -1,0 +1,8 @@
+[install]
+# Use exact versions for dependencies
+exact = true
+
+[env]
+GEMINI_API_KEY = "AIzaSyBiCwsMm_zA8d06XKz6XAxd30dZvz96woQ"
+SUPABASE_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53Y3ZyeWNqZGx6ZXd2emx4YmJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQyMDQxNzgsImV4cCI6MjA2OTc4MDE3OH0.-9oMh9WwxcOli6p0Vh7Jz6JQtgzvqRGVa1nJSqfhUto"
+SUPABASE_URL = "https://nwcvrycjdlzewvzlxbbv.supabase.co"
