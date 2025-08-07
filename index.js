@@ -13,7 +13,7 @@ document.addEventListener('submit', (e) => {
 })
 
 
-const GeminiApiKey = process.env.GEMINI_API_KEY;
+const GeminiApiKey = import.meta.env.VITE_GEMINI_API_KEY;
 const llm = new ChatGoogleGenerativeAI({
     apiKey: GeminiApiKey,
     model: "models/gemini-2.5-flash" 

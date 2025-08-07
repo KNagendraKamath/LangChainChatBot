@@ -4,9 +4,9 @@ import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { TaskType } from "@google/generative-ai";    
 
   
-  const sbApiKey = process.env.SUPABASE_API_KEY
-  const sbUrl = process.env.SUPABASE_URL
-  const GeminiApiKey = process.env.GEMINI_API_KEY;
+  const sbApiKey = import.meta.env.VITE_SUPABASE_API_KEY
+  const sbUrl = import.meta.env.VITE_SUPABASE_URL
+  const GeminiApiKey = import.meta.env.VITE_GEMINI_API_KEY;
   const client = createClient(sbUrl, sbApiKey)
 
   const embeddings = new GoogleGenerativeAIEmbeddings({

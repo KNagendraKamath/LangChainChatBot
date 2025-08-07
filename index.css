@@ -44,7 +44,8 @@ main {
 }
 
 .logo {
-    width:  160px;
+    width:  10px;
+    height: 10px;
 }
 
 .chatbot-conversation-container {
